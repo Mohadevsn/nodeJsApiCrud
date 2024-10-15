@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const Product = require("./models/product.model.js");
 const ProductRoute = require("./routes/product.route.js");
+require("dotenv").config();
 const app = express();
 
 // middleware
@@ -22,7 +23,7 @@ app.get("/", (req, res) => {
 
 mongoose
   .connect(
-    "mongodb+srv://mohawade23:ohReXY4XRVZsTKA3@nodebackenddb.i6fwf.mongodb.net/?retryWrites=true&w=majority&appName=nodeBackendDb"
+    process.env.MONGO_DB_URL
   )
   .then(() => {
     console.log("connected to database");
