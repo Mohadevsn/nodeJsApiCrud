@@ -11,7 +11,7 @@ const register = async (req, res) => {
 
     const user = User.findOne({ email: email });
 
-    if (user) {
+    if (!user) {
       return res.status(400).json({ message: "This user already exists" });
     }
 
@@ -62,12 +62,13 @@ const login = async (req, res) => {
       "username": user.username
     }
 
-    const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: "5m"});
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: "1h"});
 
     res.cookie("token", token);
 
 
-    res.status(200).json({ message: "Connection successfull",
+    res.status(200).json({ 
+      message: "Connection successfull",
       token: token
      });
   } catch (error) {
@@ -75,8 +76,27 @@ const login = async (req, res) => {
   }
 };
 
+const logout = async (req, res)=>{
+
+  const token = req.cookies.token;
+
+  if(!token){
+    return res.status(401).json({message: "Unauthorized"})
+  }
+
+  try{
+    res.clearCookie("token");
+    res.status(200).json({message: "Bye bye"})
+    res.end()
+  }catch(error){
+    res.status(500).json(error.message);
+  }
+  
+}
+
 module.exports = {
   register,
   login,
+  logout
 };
 
