@@ -1,4 +1,3 @@
-const express = require("express");
 const Product = require("../models/product.model");
 
 const getAllProduct = async (req, res) => {
@@ -15,8 +14,8 @@ const getSingleProduct = async (req, res) => {
     const { id } = req.params;
     const product = await Product.findById(id);
 
-    if(!product){
-        res.status(404).json({message: "product not found"})
+    if (!product) {
+      res.status(404).json({ message: "product not found" });
     }
     res.status(200).json(product);
   } catch (error) {
@@ -74,5 +73,5 @@ module.exports = {
   getSingleProduct,
   createProduct,
   updateProduct,
-  deleteProduct
+  deleteProduct,
 };

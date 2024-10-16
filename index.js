@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const Product = require("./models/product.model.js");
 const ProductRoute = require("./routes/product.route.js");
+const AuthRoute =  require("./routes/auth.route.js")
 require("dotenv").config();
 const app = express();
 
@@ -12,6 +12,7 @@ app.use(express.urlencoded({extended: false}))
 // routes
 
 app.use("/api/products", ProductRoute)
+app.use("/auth", AuthRoute)
 
 
 app.get("/", (req, res) => {
