@@ -2,16 +2,18 @@ const express = require("express");
 const Product = require("../models/product.model.js");
 const router = express.Router();
 const {getAllProduct, getSingleProduct, createProduct, updateProduct, deleteProduct} = require("../controllers/product.controller.js")
+const verifyjwt = require("../middleware/verifyToken.middleware")
 
-router.get("/", getAllProduct);
 
-router.get("/:id", getSingleProduct);
+router.get("/", verifyjwt,getAllProduct);
 
-router.post("/add", createProduct);
+router.get("/:id", verifyjwt, getSingleProduct);
 
-router.put("/update/:id", updateProduct);
+router.post("/add", verifyjwt, createProduct);
 
-router.delete("/delete/:id", deleteProduct);
+router.put("/update/:id", verifyjwt, updateProduct);
+
+router.delete("/delete/:id", verifyjwt, deleteProduct);
 
 
 

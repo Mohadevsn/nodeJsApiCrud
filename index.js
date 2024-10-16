@@ -2,12 +2,16 @@ const express = require("express");
 const mongoose = require("mongoose");
 const ProductRoute = require("./routes/product.route.js");
 const AuthRoute =  require("./routes/auth.route.js")
+const cookieParser = require("cookie-parser")
 require("dotenv").config();
 const app = express();
+
 
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: false}))
+app.use(cookieParser());
+
 
 // routes
 
