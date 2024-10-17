@@ -53,7 +53,7 @@ const login = async (req, res) => {
     const passwordMatch = await Bcrypt.compare(password, user.password)
 
     if(!passwordMatch){
-      return res.status(401).json({error: "Invalid credential"})
+      return res.status(401).json({error: "Invalid credentials"})
     }
 
     const payload = {
@@ -71,6 +71,7 @@ const login = async (req, res) => {
       message: "Connection successfull",
       token: token
      });
+     res.end();
   } catch (error) {
     res.status(500).json(error.message);
   }

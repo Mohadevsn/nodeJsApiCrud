@@ -1,6 +1,6 @@
 
 
-const verifyLogin = async (req, res, next)=>{
+const verifyLogin = (req, res, next)=>{
     const token = req.cookies.token ;
 
     if(token){
